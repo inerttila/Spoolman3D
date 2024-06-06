@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  spoolman:
+    image: donkie/spoolman:test
+    environment:
+      - SPOOLMAN_LOGGING_LEVEL=INFO
+      - TZ=Europe/Stockholm
+  tester:
+    image: donkie/spoolman-tester:latest
+    volumes:
+      - ./tests:/tester/tests
+    environment:
+      - DB_TYPE=sqlite
+    depends_on:
+      - spoolman
